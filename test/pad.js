@@ -45,3 +45,11 @@ test("\ncomparison tests", function (t) {
   t.end()
 })
 
+test("\nmalformed input", function (t) {
+  ["0.6.0dev2", "0.0.01--prototype"].forEach(function (v) {
+    var padded = semver.pad(v)
+    t.ok(padded, 'pad() must parse ' + v)
+  })
+  t.end()
+})
+

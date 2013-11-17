@@ -16,15 +16,15 @@ function unpad (val) {
 }
 
 exports.pad = function (ver) {
-  var ver = semver.parse(ver)
+  var ver = semver.parse(ver, true)
   ver.shift()
   ver[3] = ver[3] ? ver[3].replace(/-/g, '') : 0
   ver = ver.map(pad)
   ver[4] = (ver[4] ? '_' + (ver[4] || '') : '~')
-  return ver.slice(0, 5).join('!') 
+  return ver.slice(0, 5).join('!')
 }
 
-exports.unpad = function (ver) {  
+exports.unpad = function (ver) {
   var parts = ver.split('!')
   var build = Number(unpad(parts[3]))
   var ver =
@@ -43,7 +43,7 @@ exports.range = function (r) {
   if('>=' == first.substring(0, 2)) {
     obj.start = exports.pad(
       first.substring(2)
-    ) 
+    )
     first = range.shift()
   }
   else if('>' == first[0]) {
